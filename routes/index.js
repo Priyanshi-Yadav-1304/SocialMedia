@@ -314,6 +314,8 @@ router.post('/create-post',isLoggedIn,upload.single("avatar"),function(req,res){
       postTitle:req.body.title,
     })
     .then(function(postCreated){
+      req.user.posts.push(postCreated);
+      req.user.save();
       res.redirect('/timeline');
     })
     .catch(function(err){
@@ -381,6 +383,8 @@ router.get('/dislike/:id',isLoggedIn, function(req, res, next) {
   Post.findById(req.params.id)
   .then(function(postFound){
     fs.unlinkSync(path.join('public','uploads',postFound.avatar));
+    req.user.posts.remove(postFound);
+    req.user.save();
     postFound.delete();
     res.redirect("/profile");
   })
