@@ -1,0 +1,176 @@
+<%- include('./partials/header')%>
+<div class="profilebdabox">
+    
+<form class="imgform"
+action="/uploadimage/<%= user._id%>"
+method="POST"
+enctype="multipart/form-data"
+>
+<img class="profilephoto preview"
+    onclick="changeImage()"
+    src="/uploads/<%= user.avatar %>"
+    alt="<%= user.avatar%>"
+/>
+<input name="oldavatar" type="hidden" value="<%= user.avatar %>" />
+<input name="avatar" style="display: none" type="file" />
+<button style="display: none" class="imgbutton">Upload Image</button>
+</form>
+
+
+
+<form  class="dd" action="/profile/<%= user._id %>" method="post">
+
+<div class="editpro">
+    <input style="color: black;" disabled class="username bordernone"
+    type="text"
+    placeholder="@johndoe"
+    name="username"
+    value="<%= user.username%>"
+/>
+<button class="editbtn"><img height="20px" src="/projectimg/icons8-edit-80.png" alt=""></button>
+<button hidden class="savebtn">Save</button>
+<a hidden class="cancelbtn" href="/profile">Cancel</a>
+</div>
+<br />
+<br />
+
+<input style="color: black;" disabled class="bordernone"
+    type="text"
+    placeholder="write about yourself..."
+    name="about"
+    value="<%= user.about%>"
+/><br />
+<br />
+<!-- <input class="bordernone"
+    type="text"
+    placeholder="John Doe"
+    name="name"
+    value="<%= user.name%>"
+/>
+<br />
+<br /> -->
+<input style="color: black;" disabled class="bordernone"
+    type="email"
+    placeholder="example@john.doe"
+    name="email"
+    value="<%= user.email%>"
+/><br />
+<br />
+
+
+<input style="color: black;" disabled class="bordernone"
+    type="number"
+    placeholder="contact"
+    name="phone"
+    value="<%= user.phone%>"
+/><br />
+<br />
+
+
+<input style="color: black;" disabled class="bordernone"
+    type="text"
+    placeholder="where do you live ?"
+    name="city"
+    value="<%= user.city%>"
+/><br />
+<br />
+
+<!-- <div class="profile-gender" class="bordernone">
+    <input class="genderh" <%= user.gender === 'male' ? 'checked' : '' %> type="radio"
+    name="gender" value="male" /> Male <input class="genderh" <%= user.gender === 'female' ?
+    'checked' : '' %> type="radio" name="gender" value="female" /> Female
+</div> -->
+
+</form>
+</div>
+
+
+
+
+
+<div class="m">
+    <% posts.forEach(function(post){ %>
+       <br>
+   <div class="postbox">
+    <div class="post">
+           <div class="postboxkauper">
+            <img width="40vmin" height="40vmin" style="border-radius: 50%;" class="postboxprofile" src="/uploads/<%=user.avatar%>" alt="">
+            <div>
+                <h6><%= user.name %></h6>
+                <% var s = post.createdAt+"" %>
+                <p><%= s.substring(4,15) %></p>
+            </div>
+           </div>
+       
+        <a class="likedislike" href="/delete-post/<%= post._id %>"><img height="22vmin" class="menusarko" src="/projectimg/icons8-trash-32.png" alt=""></a>
+    </div>
+
+<hr class="hrlite">
+    <div class="sarko"> <%= post.postTitle %> </div>
+    <br>
+    <div class="sarko"> <%= post.postContent %> </div>
+    
+    <% if(post.avatar){ %>
+        <% if(post.avatar.includes('.mp4')){ %>
+         <div>
+            <video height="320px" controls  src="/uploads/<%= post.avatar %>"></video>
+         </div>   
+         <% } else if(post.avatar.includes('.mp3')) { %>
+        <audio src="/uploads/<%= post.avatar %>"></audio>
+            <% } else { %>
+        <img class="postimgsize" src="/uploads/<%= post.avatar %>" alt="">
+        <% } %>
+        
+        <div class="likedisplay">
+            <br>
+            <% if(post.likes.includes(user._id)){ %>
+               <div class="c">
+                <%= post.likes.length %><a class="likedislike" href="/like/<%= post._id%>"><img height="25px" src="/projectimg/icons8-thumbs-up-24 color.png" alt=""></a>
+               </div>
+          <%  }else{ %>
+          <div  class="c">
+            <%= post.likes.length %><a class="likedislike" href="/like/<%= post._id%>"><img height="25px" src="/projectimg/icons8-thumbs-up-24.png" alt=""></a>
+          </div>
+           <% } %>
+
+           <% if(post.dislikes.includes(user._id)){ %>
+           <div  class="c">
+            <%= post.dislikes.length %><a class="likedislike" href="/dislike/<%= post._id%>"><img height="25px" src="/projectimg/icons8-thumbs-down-24.png" alt=""></a>
+           </div>
+      <%  }else{ %>
+       <div  class="c">
+        <%= post.dislikes.length %><a class="likedislike" href="/dislike/<%= post._id%>"><img height="25px" src="/projectimg/icons8-thumbs-down-24 (1).png" alt=""></a>
+       </div>
+       <% } %>
+            <!-- <a class="likedislike , c" href="/delete-post/<%= post._id %>">Delete</a> -->
+        </div>
+<br>
+   </div>
+        <% } %>
+        <% }) %>
+</div>
+
+
+
+<script>
+    function changeImage() {
+        var preview = document.querySelector(".preview");
+        var ImageButton = document.querySelector(".imgbutton");
+        var input = document.querySelector("input[type='file']");
+        preview.addEventListener("click", function () {
+            input.click();
+        });
+        input.addEventListener("change", function (e) {
+            // console.log(e.target.files[0]);
+            // console.log(input.files[0]);
+            const file = input.files[0];
+            if (file) {
+                ImageButton.style.display = "block";
+                preview.src = URL.createObjectURL(file);
+            }
+        });
+    }
+</script>
+<script src="/javascripts/profile.js"></script>
+
+<%- include('./partials/footer')%>

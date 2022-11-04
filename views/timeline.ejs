@@ -1,0 +1,74 @@
+<%- include('partials/header')%>
+<div class="m">
+    <% posts.forEach(function(post){ %>
+       <br>
+   <div class="postbox">
+        <div class="post">
+            <% users.forEach(function(user){%>
+               <% if(post.postedBy.equals(user._id)) {%>
+               <div class="postboxkauper">
+                <img width="40vmin" height="40vmin" style="border-radius: 50%;" class="postboxprofile" src="/uploads/<%=user.avatar%>" alt="">
+                <div>
+                    <h6><%= user.name %></h6>
+                    <% var s = post.createdAt+"" %>
+                    <p><%= s.substring(4,15) %></p>
+                </div>
+               </div>
+          <%  } %>
+          <%  }) %>
+        </div>
+    
+    <hr class="hrlite">
+
+    <div class="sarko"> <%= post.postTitle %> </div>
+    <br>
+    <div class="sarko"> <%= post.postContent %> </div>
+    
+    <% if(post.avatar){ %>
+        <% if(post.avatar.includes('.mp4')){ %>
+         <div>
+            <video height="320px" controls  src="/uploads/<%= post.avatar %>"></video>
+         </div>   
+         <% } else if(post.avatar.includes('.mp3')) { %>
+        <audio src="/uploads/<%= post.avatar %>"></audio>
+            <% } else { %>
+        <img class="postimgsize" src="/uploads/<%= post.avatar %>" alt="">
+        <% } %>
+        
+        <div class="likedisplay">
+            <br>
+            <% if(post.likes.includes(user._id)){ %>
+               <div class="c">
+                <%= post.likes.length %><a class="likedislike" href="/like/<%= post._id%>"><img height="25px" src="/projectimg/icons8-thumbs-up-24 color.png" alt=""></a>
+               </div>
+          <%  }else{ %>
+          <div  class="c">
+            <%= post.likes.length %><a class="likedislike" href="/like/<%= post._id%>"><img height="25px" src="/projectimg/icons8-thumbs-up-24.png" alt=""></a>
+          </div>
+           <% } %>
+
+           <% if(post.dislikes.includes(user._id)){ %>
+           <div  class="c">
+            <%= post.dislikes.length %><a class="likedislike" href="/dislike/<%= post._id%>"><img height="25px" src="/projectimg/icons8-thumbs-down-24.png" alt=""></a>
+           </div>
+      <%  }else{ %>
+       <div  class="c">
+        <%= post.dislikes.length %><a class="likedislike" href="/dislike/<%= post._id%>"><img height="25px" src="/projectimg/icons8-thumbs-down-24 (1).png" alt=""></a>
+       </div>
+       <% } %>
+        </div>
+
+
+<br>
+   </div>
+   
+        <!-- <h3>
+            <a href="/dislike/<%= post._id%>">Dislike</a><%= post.dislikes.length %>
+        </h3> -->
+        <!-- <div></div>
+        <a href="/delete-post/<%= post._id %>">Delete</a> -->
+        <% } %>
+
+        <% }) %>
+
+</div>

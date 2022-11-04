@@ -1,0 +1,125 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow-x: hidden;
+    font-family: roboto;
+    /* background-color: yellow; */
+}
+.mprofile{
+    position: absolute;
+    left: 100%;
+    top: 7.7%;
+    background-color: white;
+    box-shadow: 0 0 1vmin black;
+    width: 15%;
+    height: 28%;
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+#underline{
+    margin-top: 1vmin;
+    text-decoration: none;
+    color: black;
+    font: 600 2.5vmin black;
+    font-family: roboto;
+    margin-left: 2vmin;
+}
+.profilebdabox{
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5vmin 5vmin;
+    margin-top: 1vmin;
+    margin-left: 20vmin;
+    border-bottom: 1px solid rgb(202, 193, 193);
+    /* background-color: yellow; */
+}
+.profilephoto{
+    width: 25vmin;
+    height: 25vmin;
+    border-radius: 50%;
+    /* margin-left: 50vmin; */
+}
+.profile-gender{
+    display: flex;
+}
+
+.bordernone{
+    border: none;
+    font-size: 4vmin;
+    width: 65vmin;
+    background-color: transparent;
+}
+
+.username{
+    width: 60vmin;
+    height: 10vmin;
+    font-size: 6vmin;
+    border: none;
+    font-weight: 600;
+    background-color: transparent;
+    
+}
+
+.dd{
+    width: 100vmin;
+    margin-left: 5vmin;
+    /* background-color: red; */
+}
+.genderh{
+    height: 2.5vmin;
+}
+.editpro{
+    
+    display: flex;
+    justify-content: space-between;
+}
+.editpro > button{
+    height: 25px;
+}
+
+.imgform{
+   width: 30%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   /* margin-right: 40vmin; */
+   /* background-color: green; */
+}
+.savebtn{
+    width: 7vmin;
+    height: 3.2vmin;
+    text-decoration: none;
+    border: 1px solid grey;
+    text-align: center;
+    color: black;
+    font-weight: 500;
+    margin-left: 18vmin;
+}
+.cancelbtn{
+    width: 7vmin;
+    height: 3.2vmin;
+    text-decoration: none;
+    border: 1px solid grey;
+    text-align: center;
+    color: black;
+    font-weight: 500;
+}
+.cancelbtn:hover{
+    background-color: rgb(238, 235, 235);
+}
+.savebtn:hover{
+    background-color: rgb(238, 235, 235);
+}
